@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" strict="true" name="App"
+               packages="com.goticks">
+    <!-- 	<Filter type="ThresholdFilter" level="info" />
+     -->	<Appenders>
+    <Appender type="Console" name="STDOUT" target="SYSTEM_OUT">
+        <Layout type="JSONLayout" compact="true" eventEol="true"
+                properties="true" includeStacktrace="true" />
+    </Appender>
+    <RollingRandomAccessFile name="FILE" fileName="../logs/app.log"
+                             filePattern="logs/$${date:yyyy-MM}/app-%d{yyyy-MM-dd-HH}-%i.log.gz">
+        <Layout type="JSONLayout" compact="true" eventEol="true"
+                properties="true" includeStacktrace="true" />
+        <Policies>
+            <SizeBasedTriggeringPolicy size="250 MB"/>
+        </Policies>
+    </RollingRandomAccessFile>
+</Appenders>
+    <Loggers>
+        <logger name="org.apache.cxf.Logger" level="info">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="FILE" />
+        </logger>
+        <Root level="info">
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="FILE" />
+        </Root>
+    </Loggers>
+</Configuration>
